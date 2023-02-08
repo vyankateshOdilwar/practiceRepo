@@ -52,8 +52,17 @@
 
 package com.example.bmicalculator;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -72,6 +81,10 @@ public class ChatSectionFragment extends Fragment implements ChatOnEachCardClick
 
     private FragmentChatSectionBinding binding;
     private ArrayList<contactModel> arrContactsList = new ArrayList<>();
+
+    private static final String CHANNEL_ID = "Notification Channel";
+    private static final int NOTIFICATION_ID = 001;
+
 
     public ChatSectionFragment(){
 
@@ -116,7 +129,33 @@ public class ChatSectionFragment extends Fragment implements ChatOnEachCardClick
 
     @Override
     public void onItemClicked(contactModel model) {
-    String details = model.name+" is "+model.status;
-        Toast.makeText(getContext(), details, Toast.LENGTH_SHORT).show();
+
+        Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.launcher_logo, null);
+        BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+        Bitmap largeIcon = bitmapDrawable.getBitmap();
+
+        NotificationManager nm = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+
+        Notification notification;
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            notification = new Notification.Builder(getContext())
+            .setLargeIcon(largeIcon)
+            .setSmallIcon(R.drawable.launcher_logo)
+            .setContentText(model.name+" is "+model.status)
+            .setSubText(model.contactNumber)
+            .setChannelId(CHANNEL_ID)
+            .build();
+            nm.createNotificationChannel(new NotificationChannel(CHANNEL_ID,"New Notification",NotificationManager.IMPORTANCE_HIGH));
+        }else{
+            notification = new Notification.Builder(getContext())
+                    .setLargeIcon(largeIcon)
+                    .setSmallIcon(R.drawable.launcher_logo)
+                    .setContentText(model.name+" is "+model.status)
+                    .setSubText(model.contactNumber)
+                    .build();
+        }
+    nm.notify(NOTIFICATION_ID,notification);
+
     }
 }

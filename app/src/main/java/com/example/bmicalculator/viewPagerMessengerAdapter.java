@@ -1,5 +1,7 @@
 package com.example.bmicalculator;
 
+import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -7,6 +9,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 public class viewPagerMessengerAdapter extends FragmentPagerAdapter {
 
+    FragmentManager fm;
 
     public viewPagerMessengerAdapter(@NonNull FragmentManager fm) {
 
@@ -39,5 +42,6 @@ public class viewPagerMessengerAdapter extends FragmentPagerAdapter {
             return "Calls";
         }
     }
+
 
 }
