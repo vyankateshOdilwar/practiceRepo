@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -16,9 +17,11 @@ public class recyclerContactAdapter extends RecyclerView.Adapter<recyclerContact
 
     Context context;
     ArrayList <contactModel> arrContacts;
-    recyclerContactAdapter (Context context, ArrayList<contactModel> arrContacts){
+    ChatOnEachCardClick oneachcardclick;
+    recyclerContactAdapter (Context context, ArrayList<contactModel> arrContacts, ChatOnEachCardClick oneachcardclick){
         this.context = context;
         this.arrContacts = arrContacts;
+        this.oneachcardclick = oneachcardclick;
     }
 
     @NonNull
@@ -37,6 +40,13 @@ public class recyclerContactAdapter extends RecyclerView.Adapter<recyclerContact
     holder.txtNumber.setText(arrContacts.get(position).contactNumber);
     holder.txtStatus.setText(arrContacts.get(position).status);
 
+    holder.cardView.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            oneachcardclick.onItemClicked(arrContacts.get(position));
+        }
+    });
+
     }
 
     @Override
@@ -46,6 +56,7 @@ public class recyclerContactAdapter extends RecyclerView.Adapter<recyclerContact
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        CardView cardView;
 
         TextView txtName, txtNumber, txtStatus;
         ImageView imgContact;
@@ -55,6 +66,7 @@ public class recyclerContactAdapter extends RecyclerView.Adapter<recyclerContact
             txtNumber = itemView.findViewById(R.id.textNumber);
             txtStatus = itemView.findViewById(R.id.txtStatus);
             imgContact = itemView.findViewById(R.id.imgContact);
+            cardView =itemView.findViewById(R.id.oneCard);
         }
     }
 }

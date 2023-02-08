@@ -6,6 +6,9 @@ android {
     namespace 'com.example.bmicalculator'
     compileSdk 33
 
+    buildFeatures {
+        dataBinding = true
+    }
     defaultConfig {
         applicationId "com.example.bmicalculator"
         minSdk 23
