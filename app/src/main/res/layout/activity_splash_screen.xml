@@ -10,11 +10,11 @@
     tools:context=".splashScreen">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="400dp"
         android:layout_marginTop="100dp"
         android:id="@+id/logo"
-        android:src="@drawable/baseline_satellite_alt_24"/>
+        android:src="@drawable/launcher_logo"/>
 
     <TextView
         android:layout_width="wrap_content"

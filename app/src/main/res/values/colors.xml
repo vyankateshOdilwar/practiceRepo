@@ -10,5 +10,5 @@
     <color name="overweight">#DA0202</color>
     <color name="underweight">#FFE504</color>
     <color name="healthy">#0CA313</color>
-    <color name="greenColor">#54CF2C</color>
+    <color name="greenColor">#000000</color>
 </resources>
